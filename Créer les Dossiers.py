@@ -2,7 +2,7 @@ from collections import deque
 import random
 import os
 import numpy as np
-os.chdir(r"C:\Users\NSI-SNT\Desktop\NSI-TP-master\Exercice Parcours en Largeur")
+os.chdir(r"C:\Users\Ridha\Desktop\NSI-TP-master\Exercice Parcours en Largeur")
 root = os.getcwd() #Naviguer avant de lancer le programme sinon ça va envahir votre dossier utilisateur
 
 File = []
@@ -44,34 +44,31 @@ def Boucle(v,p,t): #p proba initiale, t taux de décroissance
 
 #Enlever le commentaire de la ligne suivante et lancer la Fonction Boucle.
 
-# Boucle(0.5,0.9,0.000001)
+
 
 
 
 
 def Largeur(start):
-    os.chdir(r"C:\Users\NSI-SNT\Desktop\NSI-TP-master\Exercice Parcours en Largeur")
+    os.chdir(r"C:\Users\Ridha\Desktop\NSI-TP-master\Exercice Parcours en Largeur")
     visited = []
     queue = deque()
     queue.append(root+'\\'+start)
     L_Lettres=[]
     while queue:
         node = queue.popleft()
+        os.chdir(node)
         if node not in visited:
             tmp=node
             visited.append(node)
-            with open(node+"\\text.txt","r") as file:
-                L_Lettres.append(file.read())
+            if "text.txt" in os.listdir():
+                with open(node+"\\text.txt","r") as file:
+                    L_Lettres.append(file.read())
             unvisited=[]
             for n in os.listdir():
-                try:
-                    int(n)
+                if n!= 'text.txt':
                     path=tmp+'\\'+str(n)
                     if path not in unvisited:
                         unvisited.append(path)
-                except:
-                    pass
-
             queue.extend(unvisited)
-
-    return visited,L
+    return visited
